@@ -57,10 +57,11 @@ export class ResearchSupervisor {
   private contextAgent: ContextAnalysisAgent;
   private plannerModel: ChatAnthropic;
 
-  constructor(options: { modelName?: string; useMockMCP?: boolean } = {}) {
+  constructor(options: { modelName?: string; useMockMCP?: boolean, mcpServerUrl?: string } = {}) {
     this.docSearchAgent = new DocumentationSearchAgent({
       modelName: options.modelName,
       useMockMCP: options.useMockMCP,
+      mcpServerUrl: options.mcpServerUrl
     });
 
     this.contextAgent = new ContextAnalysisAgent({

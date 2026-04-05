@@ -15,11 +15,16 @@ import {
 
 export class DocumentationSearchAgent {
   private useMockMCP: boolean;
+  private readonly mcpServerUrl: string;
 
-  constructor(options: { modelName?: string; useMockMCP?: boolean } = {}) {
+  constructor(options: { modelName?: string; useMockMCP?: boolean; mcpServerUrl?: string } = {}) {
     // Model will be used when MCP integration is complete
     // For now, we use mocked responses
     this.useMockMCP = options.useMockMCP !== false; // Default to true for POC
+    this.mcpServerUrl =
+      options.mcpServerUrl ??
+      process.env.MCP_SERVER_URL ??
+      'https://mcp-docs.dev.medicmobile.org/mcp';
   }
 
   /**
@@ -82,7 +87,9 @@ export class DocumentationSearchAgent {
     // };
     // return await mcp.call(mcpCall);
 
-    throw new Error('MCP integration not yet implemented');
+    throw new Error(
+      `MCP integration not yet implemented (endpoint: ${this.mcpServerUrl}). Use useMockMCP: true until the client is wired up.`
+    );
   }
 
   /**

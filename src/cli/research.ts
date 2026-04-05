@@ -71,9 +71,14 @@ async function main() {
 
     // Create Research Supervisor instance
     console.log('🤖 Initializing Research Supervisor...\n');
+
+    const mcpServerUrl = process.env.MCP_SERVER_URL || 'https://mcp-docs.dev.medicmobile.org/mcp';
+    const useMockMCP = process.env.USE_MOCK_MCP === 'true'; // allow explicit override
+
     const supervisor = new ResearchSupervisor({
       modelName: 'claude-sonnet-4-20250514',
-      useMockMCP: true, // Using mocked MCP for now
+      useMockMCP,
+      mcpServerUrl,
     });
 
     // Display issue details
